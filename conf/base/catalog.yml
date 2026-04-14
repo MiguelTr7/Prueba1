@@ -1,0 +1,83 @@
+# =============================================================================
+# FUENTES DE DATOS CRUDOS (Caso 3: Recursos Humanos)
+# =============================================================================
+
+empleados_raw:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/01_raw/empleados.csv
+  load_args:
+    encoding: utf-8
+
+evaluaciones_raw:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/01_raw/evaluaciones.csv
+  load_args:
+    encoding: utf-8
+
+capacitaciones_raw:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/01_raw/capacitaciones.csv
+  load_args:
+    encoding: utf-8
+
+ausencias_raw:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/01_raw/ausencias.csv
+  load_args:
+    encoding: utf-8
+
+# =============================================================================
+# OUTPUT: REPORTE DE DIAGNÓSTICO INICIAL
+# =============================================================================
+
+reporte_diagnostico_inicial:
+  type: kedro_datasets.json.JSONDataset
+  filepath: data/08_reporting/diagnostico_inicial.json
+
+# =============================================================================
+# OUTPUTS DEL PIPELINE DE LIMPIEZA
+# =============================================================================
+
+empleados_cleaned:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/02_intermediate/empleados_cleaned.csv
+  save_args:
+    index: False
+
+evaluaciones_cleaned:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/02_intermediate/evaluaciones_cleaned.csv
+  save_args:
+    index: False
+
+capacitaciones_cleaned:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/02_intermediate/capacitaciones_cleaned.csv
+  save_args:
+    index: False
+
+ausencias_cleaned:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/02_intermediate/ausencias_cleaned.csv
+  save_args:
+    index: False
+
+# =============================================================================
+# DATASETS DE SALIDA DEL PIPELINE 3 (Primary)
+# =============================================================================
+
+primary_dataset:
+  type: kedro_datasets.pandas.CSVDataset
+  filepath: data/03_primary/primary_dataset.csv
+  load_args:
+    encoding: latin-1
+  save_args:
+    index: False
+
+# =============================================================================
+# DATASETS DE SALIDA DEL PIPELINE 4 (Data Validation)
+# =============================================================================
+
+validation_report:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/08_reporting/reporte_validacion.txt
