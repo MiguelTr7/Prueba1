@@ -12,21 +12,21 @@ def create_pipeline(**kwargs) -> Pipeline:
         # 1. Agregamos las evaluaciones por empleado
         node(
             func=aggregate_evaluations,
-            inputs="int_evaluaciones",
+            inputs="evaluaciones_int",
             outputs="prm_evaluaciones_agg",
             name="agg_evaluaciones_node",
         ),
         # 2. Agregamos las ausencias por empleado
         node(
             func=aggregate_ausencias,
-            inputs="int_ausencias",
+            inputs="ausencias_int",
             outputs="prm_ausencias_agg",
             name="agg_ausencias_node",
         ),
         # 3. Agregamos las capacitaciones por empleado
         node(
             func=aggregate_capacitaciones,
-            inputs="int_capacitaciones",
+            inputs="capacitaciones_int",
             outputs="prm_capacitaciones_agg",
             name="agg_capacitaciones_node",
         ),
@@ -34,7 +34,7 @@ def create_pipeline(**kwargs) -> Pipeline:
         node(
             func=create_master_table,
             inputs=[
-                "int_empleados", 
+                "empleados_int", 
                 "prm_evaluaciones_agg", 
                 "prm_ausencias_agg", 
                 "prm_capacitaciones_agg"

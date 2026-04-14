@@ -35,33 +35,40 @@ reporte_diagnostico_inicial:
   filepath: data/08_reporting/diagnostico_inicial.json
 
 # =============================================================================
-# OUTPUTS DEL PIPELINE DE LIMPIEZA
+# OUTPUTS DEL PIPELINE DE LIMPIEZA (Capa Intermediate)
 # =============================================================================
 
-empleados_cleaned:
+empleados_int:
   type: kedro_datasets.pandas.CSVDataset
-  filepath: data/02_intermediate/empleados_cleaned.csv
+  filepath: data/02_intermediate/empleados_int.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: False
 
-evaluaciones_cleaned:
+evaluaciones_int:
   type: kedro_datasets.pandas.CSVDataset
-  filepath: data/02_intermediate/evaluaciones_cleaned.csv
+  filepath: data/02_intermediate/evaluaciones_int.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: False
 
-capacitaciones_cleaned:
+capacitaciones_int:
   type: kedro_datasets.pandas.CSVDataset
-  filepath: data/02_intermediate/capacitaciones_cleaned.csv
+  filepath: data/02_intermediate/capacitaciones_int.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: False
 
-ausencias_cleaned:
+ausencias_int:
   type: kedro_datasets.pandas.CSVDataset
-  filepath: data/02_intermediate/ausencias_cleaned.csv
+  filepath: data/02_intermediate/ausencias_int.csv
+  load_args:
+    encoding: latin-1
   save_args:
     index: False
-
 # =============================================================================
 # DATASETS DE SALIDA DEL PIPELINE 3 (Primary)
 # =============================================================================
