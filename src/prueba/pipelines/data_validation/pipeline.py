@@ -11,7 +11,8 @@ def create_pipeline(**kwargs) -> Pipeline:
         ),
         node(
             func=compare_before_after,
-            inputs=["int_empleados", "primary_dataset"],
+            # CAMBIAMOS "int_empleados" por "empleados_int"
+            inputs=["empleados_int", "primary_dataset"], 
             outputs="val_comparison_text",
             name="compare_before_after_node",
         ),
