@@ -3,3 +3,5 @@ jupyterlab>=3.0
 notebook
 kedro~=0.19.0
 scikit-learn
+matplotlib
+seaborn
