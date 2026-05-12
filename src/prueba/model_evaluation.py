@@ -7,13 +7,12 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import (
     mean_squared_error, r2_score, mean_absolute_error,
-    mean_absolute_percentage_error
+    mean_absolute_percentage_error, cross_val_score
 )
-# CORRECCIÓN: Se mueve cross_val_score aquí
-from sklearn.model_selection import cross_validate, cross_val_score 
+from sklearn.model_selection import cross_validate
+
 
 def evaluar_modelos_regresion(modelos, X_train, X_test, y_train, y_test, cv=5):
-    # ... (el resto del código de la función se mantiene igual)
     """
     Evalua multiples modelos de regresion con metricas estándar.
     
