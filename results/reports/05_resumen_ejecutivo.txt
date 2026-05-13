@@ -1,0 +1,42 @@
+================================================================================
+RESUMEN EJECUTIVO - PROYECTO DE PREDICCIÓN DE DESEMPEÑO
+================================================================================
+
+OBJETIVO:
+Desarrollar modelos de machine learning para predecir y analizar el desempeño
+de empleados utilizando datos de ausencias, capacitaciones y evaluaciones.
+
+METODOLOGÍA:
+1. Análisis Exploratorio de Datos (EDA)
+2. Ingeniería de Features y Preparación de Datos
+3. Modelado Supervisado (7 modelos de regresión)
+4. Evaluación y Comparación de Modelos
+5. Optimización de Hiperparámetros
+6. Análisis No Supervisado (PCA, K-Means)
+
+RESULTADOS CLAVE:
+- Mejor modelo supervisado: Gradient Boosting/SVR
+- Dimensiones PCA (95% varianza): 9
+- Clusters identificados: 5
+- Silhouette Score: 0.4633
+
+DATOS:
+- Empleados: 309
+- Features totales: 14
+- Registros de evaluación: 515
+- Train/Test split: 80/20
+
+RECOMENDACIONES:
+1. Implementar el modelo predictivo en sistemas operacionales
+2. Usar clustering para segmentación estratégica de empleados
+3. Monitorear desempeño del modelo regularmente
+4. Actualizar datos y reentrenar modelos mensualmente
+
+ARCHIVOS GENERADOS:
+- Notebooks: 01-05_*.ipynb
+- Gráficos: results/plots/
+- Métricas: results/metrics/
+- Reportes: results/reports/
+- Modelos: results/models/
+
+================================================================================

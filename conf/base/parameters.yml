@@ -1,1 +1,32 @@
 cleaning_params: {}
+
+# Model Training Parameters
+model_training:
+  split:
+    test_size: 0.2
+    random_state: 42
+    target_column: "puntaje_desempeno"
+  scaling:
+    method: "standard"
+  models:
+    use_default: true
+  save:
+    models_dir: "results/models"
+
+# Model Evaluation Parameters
+model_evaluation:
+  metrics:
+    calculate_all: true
+  cv:
+    cv_folds: 5
+  report:
+    include_plots: true
+
+# Hyperparameter Optimization Parameters
+hyperparameter_optimization:
+  random_forest:
+    n_iter: 20
+    cv_folds: 5
+  gradient_boosting:
+    n_iter: 20
+    cv_folds: 5

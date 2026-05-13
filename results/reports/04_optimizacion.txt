@@ -1,0 +1,25 @@
+================================================================================
+REPORTE DE OPTIMIZACION DE HIPERPARAMETROS
+================================================================================
+
+RANDOM FOREST
+--------------------------------------------------------------------------------
+Mejor Score (R2 CV): -0.6499
+Mejores Parametros:
+  - max_depth: 10
+  - min_samples_leaf: 4
+  - min_samples_split: 10
+  - n_estimators: 200
+Tiempo de ejecucion: 14.88 segundos
+
+GRADIENT BOOSTING
+--------------------------------------------------------------------------------
+Mejor Score (R2 CV): -0.4237
+Mejores Parametros:
+  - subsample: 0.8
+  - n_estimators: 50
+  - min_samples_split: 10
+  - min_samples_leaf: 4
+  - max_depth: 3
+  - learning_rate: 0.05
+Tiempo de ejecucion: 1.71 segundos

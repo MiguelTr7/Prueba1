@@ -88,3 +88,99 @@ primary_dataset:
 validation_report:
   type: kedro_datasets.text.TextDataset
   filepath: data/08_reporting/reporte_validacion.txt
+
+# =============================================================================
+# DATASETS DEL PIPELINE DE ENTRENAMIENTO (Model Training)
+# =============================================================================
+
+model_data_split:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/05_model_input/data_split.pkl
+
+model_data_prepared:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/05_model_input/data_prepared.pkl
+
+model_training_results:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/06_models/training_results.pkl
+
+model_predictions:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/06_models/predictions.pkl
+
+models_directory:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/06_models/models_manifest.txt
+
+# =============================================================================
+# DATASETS DEL PIPELINE DE EVALUACIÓN (Model Evaluation)
+# =============================================================================
+
+model_metrics_calculated:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/06_models/metrics_calculated.pkl
+
+model_cv_scores:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/06_models/cv_scores.pkl
+
+model_residuals_analysis:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/06_models/residuals_analysis.pkl
+
+evaluation_report_text:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/08_reporting/evaluation_report.txt
+
+# =============================================================================
+# DATASETS DEL PIPELINE DE OPTIMIZACIÓN (Hyperparameter Optimization)
+# =============================================================================
+
+rf_optimization_results:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/06_models/rf_optimization.pkl
+
+gb_optimization_results:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/06_models/gb_optimization.pkl
+
+optimization_comparison:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/06_models/optimization_comparison.pkl
+
+optimization_report_text:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/08_reporting/optimization_report.txt
+
+# =============================================================================
+# DATASETS INTERMEDIOS TRANSFORMACIÓN (Primary)
+# =============================================================================
+
+prm_evaluaciones_agg:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/04_feature/evaluaciones_agg.pkl
+
+prm_ausencias_agg:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/04_feature/ausencias_agg.pkl
+
+prm_capacitaciones_agg:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/04_feature/capacitaciones_agg.pkl
+
+prm_master_table_raw:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/04_feature/master_table_raw.pkl
+
+# =============================================================================
+# DATASETS INTERMEDIOS VALIDACIÓN
+# =============================================================================
+
+val_summary_dict:
+  type: kedro_datasets.pickle.PickleDataset
+  filepath: data/07_model_output/val_summary.pkl
+
+val_comparison_text:
+  type: kedro_datasets.text.TextDataset
+  filepath: data/07_model_output/val_comparison.txt
