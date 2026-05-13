@@ -60,30 +60,35 @@ def cross_validation_scores(
     Returns:
         dict con scores de CV
     """
-    models = prediction_data['models']
-    X_train = prediction_data['X_train'] if 'X_train' in prediction_data else None
-    y_train = prediction_data['y_train'] if 'y_train' in prediction_data else None
+    models = prediction_data['models'] if 'models' in prediction_data else {}
+    X_train = prediction_data.get('X_train')
+    y_train = prediction_data.get('y_train')
     
     cv_scores = {}
     
-    if X_train is not None and y_train is not None:
+    if X_train is not None and y_train is not None and models:
         cv_folds = params.get('cv_folds', 5)
         
         for model_name, model in models.items():
-            scores = cross_val_score(model, X_train, y_train, cv=cv_folds, scoring='r2')
-            cv_scores[model_name] = {
-                'mean': scores.mean(),
-                'std': scores.std(),
-                'scores': scores
-            }
-            logger.info(f"{model_name} - CV Mean: {scores.mean():.4f} (+/- {scores.std():.4f})")
+            try:
+                scores = cross_val_score(model, X_train, y_train, cv=cv_folds, scoring='r2')
+                cv_scores[model_name] = {
+                    'mean': scores.mean(),
+                    'std': scores.std(),
+                    'scores': scores
+                }
+                logger.info(f"{model_name} - CV Mean: {scores.mean():.4f} (+/- {scores.std():.4f})")
+            except Exception as e:
+                logger.warning(f"No se pudo calcular CV para {model_name}: {e}")
+    else:
+        logger.warning("No hay datos de training disponibles para validación cruzada")
     
     return {
         'cv_scores': cv_scores,
         'metrics': prediction_data.get('metrics', {}),
         'predictions': prediction_data['predictions'],
         'y_test': prediction_data['y_test'],
-        'models': models
+        'models': prediction_data.get('models', {})
     }
 
 

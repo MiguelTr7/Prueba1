@@ -32,8 +32,16 @@ def split_data(
     random_state = params.get('random_state', 42)
     target_column = params.get('target_column', 'puntaje_desempeno')
     
-    # Separar features y target
-    X = dataset.drop(columns=[target_column])
+    # Separar features y target, excluyendo columnas no numéricas
+    exclude_cols = {target_column}
+    
+    # Encontrar columnas numéricas
+    numeric_cols = dataset.select_dtypes(include=[np.number]).columns.tolist()
+    
+    # Remover target si está en numeric_cols
+    numeric_cols = [col for col in numeric_cols if col not in exclude_cols]
+    
+    X = dataset[numeric_cols]
     y = dataset[target_column]
     
     # Split
@@ -44,13 +52,14 @@ def split_data(
     )
     
     logger.info(f"Datos divididos: {X_train.shape[0]} train, {X_test.shape[0]} test")
+    logger.info(f"Features numéricas utilizadas: {len(numeric_cols)}")
     
     return {
         'X_train': X_train,
         'X_test': X_test,
         'y_train': y_train,
         'y_test': y_test,
-        'feature_names': list(X.columns)
+        'feature_names': numeric_cols
     }
 
 
@@ -158,7 +167,10 @@ def get_predictions(trained_data: dict) -> dict:
         'y_test': trained_data['y_test'],
         'models': models,
         'feature_names': trained_data['feature_names'],
-        'scaler': trained_data['scaler']
+        'scaler': trained_data['scaler'],
+        'X_train': trained_data['X_train'],
+        'y_train': trained_data['y_train'],
+        'X_test': X_test
     }
 
 

@@ -11,21 +11,28 @@ import logging
 logger = logging.getLogger(__name__)
 
 def optimize_random_forest(
-    prediction_data: dict,
+    model_prepared_and_predictions: dict,
     params: dict
 ) -> dict:
     """
     Optimiza hiperparámetros de Random Forest usando GridSearchCV
     
     Args:
-        prediction_data: dict con datos de predicción
+        model_prepared_and_predictions: dict con datos preparados y predicciones
         params: Parámetros de optimización
     
     Returns:
         dict con resultados de optimización
     """
-    X_train = prediction_data['X_train']
-    y_train = prediction_data['y_train']
+    # Obtener datos de ambas fuentes
+    X_train = model_prepared_and_predictions.get('X_train')
+    y_train = model_prepared_and_predictions.get('y_train')
+    X_test = model_prepared_and_predictions.get('X_test')
+    y_test = model_prepared_and_predictions.get('y_test')
+    
+    if X_train is None or y_train is None:
+        logger.error("No se encontraron X_train o y_train")
+        raise ValueError("Datos de entrenamiento no disponibles")
     
     param_grid = {
         'n_estimators': [50, 100, 200],
@@ -61,10 +68,10 @@ def optimize_random_forest(
         'cv_results_rf': pd.DataFrame(grid_search.cv_results_),
         'time_rf': elapsed_time,
         'X_train': X_train,
-        'X_test': prediction_data['X_test'],
+        'X_test': X_test,
         'y_train': y_train,
-        'y_test': prediction_data['y_test'],
-        'models': prediction_data['models']
+        'y_test': y_test,
+        'models': model_prepared_and_predictions.get('models', {})
     }
 
 

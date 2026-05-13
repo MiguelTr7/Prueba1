@@ -12,7 +12,7 @@ def create_pipeline(**kwargs) -> Pipeline:
     return pipeline([
         node(
             func=optimize_random_forest,
-            inputs=["model_predictions", "params:hyperparameter_optimization.random_forest"],
+            inputs=["model_data_prepared", "params:hyperparameter_optimization.random_forest"],
             outputs="rf_optimization_results",
             name="optimize_rf_node",
         ),
