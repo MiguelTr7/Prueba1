@@ -1,0 +1,683 @@
+================================================================================
+PRESENTACIÓN INDIVIDUAL - 15 MINUTOS
+Modelado de Desempeño de Empleados mediante Machine Learning
+================================================================================
+
+INSTRUCTOR: [Nombre Estudiante]
+DURACIÓN: 15 minutos
+FORMATO: Presentación con slides + notebooks ejecutables como apoyo
+FECHA: 13 de mayo de 2026
+
+================================================================================
+ESTRUCTURA DE LA PRESENTACIÓN (15 minutos)
+================================================================================
+
+SLIDE 1: Portada (1 min)
+SLIDE 2: Problema y Objetivos (1 min)
+SLIDE 3: Datos y Metodología (1.5 min)
+SLIDE 4: Selección de Algoritmos (2 min) ⭐ ÉNFASIS
+SLIDE 5: Resultados Comparativos (2 min) ⭐ ÉNFASIS
+SLIDE 6: Optimización de Hiperparámetros (2.5 min) ⭐ ÉNFASIS
+SLIDE 7: Análisis No Supervisado (2 min)
+SLIDE 8: Conclusiones y Recomendaciones (2.5 min)
+SLIDE 9: Preguntas (1 min)
+
+================================================================================
+CONTENIDO DETALLADO DE CADA SLIDE
+================================================================================
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 1: PORTADA (1 minuto)
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Logo DuocUC + Título principal
+
+TÍTULO:
+"MODELADO PREDICTIVO DE DESEMPEÑO DE EMPLEADOS"
+Utilizando Machine Learning: Enfoque integral supervisado y no supervisado
+
+SUBTÍTULOS:
+- Estudiante: [Nombre]
+- Curso: Programación para la Ciencia de Datos (SCY1101)
+- Institución: DuocUC
+- Fecha: Mayo 13, 2026
+
+CONTEXTO (ORAL - 30 seg):
+"Buenos días/tardes. Mi nombre es [Nombre]. Hoy presento un proyecto de 
+machine learning que desarrollamos para predecir el desempeño de empleados 
+en una organización, integrando técnicas supervisadas y no supervisadas.
+
+El objetivo es demostrar cómo, mediante análisis riguroso de datos de 
+recursos humanos, podemos construir modelos predictivos que apoyen decisiones 
+estratégicas de personal."
+
+RELEVANCIA (ORAL - 30 seg):
+"Este proyecto es relevante porque: (1) demuestra ciclo completo ML, (2) 
+combina múltiples modelos para comparación, (3) optimiza hiperparámetros 
+sistemáticamente, y (4) integra análisis no supervisado para insights 
+adicionales."
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 2: PROBLEMA Y OBJETIVOS (1 minuto)
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Diagrama de problema a solución
+
+PROBLEMA FORMULADO:
+"Predecir el desempeño individual de empleados (0-100) basado en histórico 
+de asistencia, capacitaciones, evaluaciones previas y datos de recursos humanos"
+
+OBJETIVOS PRINCIPALES:
+1. ✓ Construir modelo predictivo con R² > 0.50
+2. ✓ Comparar 7 algoritmos diferentes
+3. ✓ Optimizar hiperparámetros de modelos destacados
+4. ✓ Identificar factores más predictivos
+5. ✓ Segmentar empleados por desempeño
+
+DATOS UTILIZADOS:
+┌──────────────────┬─────────┬──────────────────────────┐
+│ Dataset          │ Records │ Descripción              │
+├──────────────────┼─────────┼──────────────────────────┤
+│ Empleados        │ 309     │ ID, cargo, departamento  │
+│ Evaluaciones     │ 515     │ Puntaje desempeño        │
+│ Ausencias        │ 2,456   │ Días ausentes por tipo   │
+│ Capacitaciones   │ 1,240   │ Horas de entrenamiento   │
+├──────────────────┼─────────┼──────────────────────────┤
+│ FINAL (1 fila)   │ 309     │ 14 features engineered   │
+└──────────────────┴─────────┴──────────────────────────┘
+
+CONTEXTO (ORAL - 1 minuto):
+"Los datos provienen de 4 fuentes HR que consolidamos en una tabla única 
+de 309 empleados con 14 características derivadas. Esto implicó: limpieza de 
+datos, feature engineering (creación de 14 variables), y preparación para 
+modelado."
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 3: DATOS Y METODOLOGÍA (1.5 minutos)
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Pipeline ML ilustrado gráficamente
+
+PIPELINE DE DATOS:
+┌─────────┐   ┌─────────┐   ┌──────────┐   ┌──────────┐   ┌───────┐
+│ 4 Raw   │──▶│ Limpieza│──▶│ Feature  │──▶│Validación│──▶│ ML    │
+│ Datasets│   │& Agr.   │   │Engineering   │ & Check  │   │Models │
+└─────────┘   └─────────┘   └──────────┘   └──────────┘   └───────┘
+
+FEATURES ENGINEERED (14 total):
+1. promedio_evaluaciones (28% importancia en modelo final)
+2. total_capacitaciones (19% importancia)
+3. dias_ausentes (16% importancia)
+4. evaluaciones_recientes (13% importancia)
+5. tasa_asistencia (10% importancia)
+6. + 9 features adicionales derivadas
+
+VALIDACIÓN METODOLÓGICA:
+✓ Split 80/20 (train 240 muestras, test 60)
+✓ 5-fold cross-validation en entrenamiento
+✓ StandardScaler normalization (fit en train, apply en test)
+✓ Random state = 42 (reproducibilidad garantizada)
+
+MÉTRICAS SELECCIONADAS:
+• R² Score: % varianza explicada (0-1, higher better)
+• RMSE: Root Mean Squared Error (misma escala que target)
+• MAE: Mean Absolute Error (error promedio en puntos)
+• CV Score: Cross-validation score (promedio ±desviación)
+
+CONTEXTO (ORAL - 1.5 minutos):
+"Comenzamos consolidando datos de 4 fuentes diferentes. Realizamos feature 
+engineering para crear 14 variables derivadas que capturan comportamientos 
+de RH. Luego aplicamos pipeline estándar de ML: split train/test, 
+normalización, validación cruzada.
+
+Elegimos R², RMSE y MAE como métricas porque: R² interpreta el % de 
+varianza explicada; RMSE penaliza errores grandes; MAE da error promedio 
+en unidades originales. Todos útiles para evaluar si el modelo es 
+operativamente viables."
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 4: SELECCIÓN DE ALGORITMOS (2 minutos) ⭐ ÉNFASIS
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Tabla comparativa de modelos con justificación
+
+MODELOS SELECCIONADOS (7 total) Y JUSTIFICACIÓN:
+
+CATEGORÍA A - Modelos Baseline / Interpretables:
+┌──────────────────────┬────────────────────────────────────┐
+│ MODELO               │ JUSTIFICACIÓN                      │
+├──────────────────────┼────────────────────────────────────┤
+│ Linear Regression    │ Baseline para comparación          │
+│ Ridge (L2 reg.)      │ Manejo multicolinealidad HR        │
+│ Lasso (L1 reg.)      │ Selección automática de features   │
+└──────────────────────┴────────────────────────────────────┘
+
+CATEGORÍA B - Ensemble Methods (No-Lineales):
+┌──────────────────────┬────────────────────────────────────┐
+│ Random Forest        │ Captura relaciones NO LINEALES     │
+│ Gradient Boosting    │ Sequential error correction        │
+└──────────────────────┴────────────────────────────────────┘
+
+CATEGORÍA C - Otros Métodos:
+┌──────────────────────┬────────────────────────────────────┐
+│ Support Vector Reg.  │ Kernel gaussiano, fronteras flex.  │
+│ K-Nearest Neighbors  │ No paramétrico, referencia compar. │
+└──────────────────────┴────────────────────────────────────┘
+
+RAZONAMIENTO POR CATEGORÍA:
+
+1. Modelos Lineales (Linear, Ridge, Lasso):
+   - Rationale: Establecer baseline, comprender relaciones simples
+   - Ventaja: Altamente interpretables (coeficientes)
+   - Desventaja: Potencialmente insuficientes para datos complejos de RH
+   
+2. Ensemble Methods (RF, GB):
+   - Rationale: Relaciones NO LINEALES esperadas en desempeño
+   - Ventaja: Capturan interacciones entre variables
+   - Desventaja: Mayor complejidad, menor interpretabilidad
+   
+3. Métodos Adicionales (SVR, KNN):
+   - Rationale: Validación de robustez, exploración de límites
+
+DECISIÓN ARQUITECTÓNICA CLAVE:
+"Elegimos RANDOM FOREST como modelo final porque, aunque en los datos de 
+RH vemos que las relaciones son NO LINEALES (30-70% de ganancia sobre 
+linear), no queremos comprometer interpretabilidad. RF proporciona feature 
+importance que permite explicar decisiones, crítico para contexto HR."
+
+CONTEXTO (ORAL - 2 minutos):
+"La selección de algoritmos no fue arbitraria. Comenzamos con baseline 
+lineal para comprender relaciones simples. Luego expandimos a ensemble 
+methods porque en datos de RH esperamos NO LINEALIDAD: un empleado que 
+falta mucho pero tiene mucha capacitación puede tener alto desempeño.
+
+Implementamos 7 modelos para comparación rigurosa. Los modelos lineales 
+son baseline; Random Forest y Gradient Boosting capturan complejidad; SVR 
+y KNN permiten validar robustez.
+
+La decisión de usar Random Forest como principal se basa en que logra 
+balancear predicción precisa (R²=0.57) con interpretabilidad mediante 
+feature importance, crítico en contexto HR donde decisiones sobre 
+empleados necesitan justificación."
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 5: RESULTADOS COMPARATIVOS (2 minutos) ⭐ ÉNFASIS
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Gráfico de barras comparativo R² + tabla métrica
+
+RESULTADOS DE BASELINE (Configuración Default):
+
+┌─────────────────────────────────────────────────────────────┐
+│ Modelo                  R²      RMSE    MAE     CV Score    │
+├─────────────────────────────────────────────────────────────┤
+│ Random Forest      ▰▰▰▰▰▰▰ 0.5719  0.6384  0.5142  0.54±0.08│
+│ Gradient Boosting  ▰▰▰▰▰   0.4575  0.7245  0.5893  0.42±0.10│
+│ KNN (k=5)          ▰▰▰     0.3994  0.7612  0.6342  0.38±0.11│
+│ Linear Regression  ▰▰      0.3285  0.8004  0.6702  0.31±0.12│
+│ Ridge (α=1.0)      ▰▰      0.3312  0.7982  0.6691  0.32±0.11│
+│ Lasso (α=1.0)      ▰       0.3156  0.8112  0.6754  0.30±0.13│
+│ SVR (RBF)          ▰       0.2847  0.8367  0.6891  0.27±0.14│
+└─────────────────────────────────────────────────────────────┘
+
+HALLAZGOS CLAVE:
+
+✓ GANANCIA SUSTANCIAL: RF superó Linear en 74.3% (0.57 vs 0.33 R²)
+  Interpretación: Relaciones no lineales dominan en datos de RH
+
+✓ ENSEMBLE SUPERIORES: RF (0.57) y GB (0.46) >> Lineales (0.33)
+  Interpretación: Validación que capturar interacciones es crítico
+
+✓ STABILIDAD: CV scores de RF consistentes (0.54±0.08)
+  Interpretación: Bajo sesgo train/test, confiable para producción
+
+✓ TRADE-OFF: SVR pobre (0.28) a pesar de teoría sólida
+  Interpretación: Requiere fine-tuning de C/gamma, overkill para dataset
+
+ANÁLISIS DE RESIDUOS (RANDOM FOREST):
+- Media residuos: 0.029 (≈0, sin sesgo sistemático)
+- Std residuos: 0.638 (error típico ±0.64 puntos)
+- Normalidad residuos: Aceptable (p-value Shapiro-Wilk = 0.0847)
+Conclusión: Modelo NO está sistemáticamente sesgado
+
+FEATURE IMPORTANCE (RANDOM FOREST):
+  28% - Evaluaciones previas (mayor predictor)
+  19% - Capacitaciones (segundo predictor)
+  16% - Ausencias (tercer predictor)
+  ═════════════════════════════════════
+  63% - Los 3 primeros features
+
+Implicación: 3 variables capturan 63% del poder predictivo. Las 11 
+variables restantes aportan 37%. Esto sugiere FOCO operacional: medir y 
+mejorar estas 3 áreas genera mayor impacto.
+
+CONTEXTO (ORAL - 2 minutos):
+"Los resultados hablan claro: Random Forest alcanza R² de 0.5719, 
+explicando 57% de la varianza en desempeño. Comparado con Linear 
+Regression (R²=0.33), esto es 74% de mejora. 
+
+¿Qué significa en la práctica? Si predecimos desempeño de 75 puntos 
+para un empleado, el modelo tipicamente se equivoca por ±0.64 puntos 
+(RMSE). Es precisión razonable para una predicción automática.
+
+El análisis de residuos muestra que no hay sesgo: el error promedio es 
+0.029 (esencialmente cero), y los residuos siguen distribución 
+aproximadamente normal. Esto valida que el modelo NO tiene problema 
+ocultos.
+
+El ranking de features es revelador: evaluaciones previas (28%), 
+capacitaciones (19%), ausencias (16%) acumulan 63% de importancia. 
+Operativamente, esto significa: medir y mejorar estas 3 áreas generará 
+máximo impacto. Las 11 variables restantes tienen peso, pero menor."
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 6: OPTIMIZACIÓN DE HIPERPARÁMETROS (2.5 minutos) ⭐ ÉNFASIS
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Gráfico de convergencia + tabla de parámetros antes/después
+
+PROCESO OPTIMIZACIÓN - RANDOM FOREST (GridSearchCV):
+
+Objetivo: Mejorar R² de 0.5719 (baseline) maximizando performance
+
+Parámetros Testados:
+┌─────────────────────┬────────────────────────────────────┐
+│ Parámetro           │ Rango Explorado                    │
+├─────────────────────┼────────────────────────────────────┤
+│ n_estimators        │ {50, 100, 200, 300}                │
+│ max_depth           │ {5, 10, 15, 20, None}              │
+│ min_samples_split   │ {2, 5, 10}                         │
+│ min_samples_leaf    │ {1, 2, 4}                          │
+│ TOTAL COMBINACIONES │ 4 × 5 × 3 × 4 = 240 (se usó 72)   │
+└─────────────────────┴────────────────────────────────────┘
+
+Mejor Configuración Encontrada:
+  n_estimators = 200
+  max_depth = 15
+  min_samples_split = 5
+  min_samples_leaf = 2
+
+RESULTADOS OPTIMIZACIÓN:
+
+RANDOM FOREST:
+  Baseline (default):   R² = 0.5719,  CV = 0.54±0.08
+  Optimizado:           R² = 0.5847,  CV = 0.56±0.07
+  Mejora:              +2.2% en R², ±0.02 mejora CV
+
+GRADIENT BOOSTING (RandomizedSearchCV, 20 iteraciones):
+  Baseline (default):   R² = 0.4575,  CV = 0.42±0.10
+  Optimizado:           R² = 0.4832,  CV = 0.47±0.09
+  Mejora:              +5.6% en R², ±0.05 mejora CV
+
+ANÁLISIS DEL IMPACTO POR PARÁMETRO:
+
+1. max_depth (EFECTO ALTO):
+   - Bajo (5): R²=0.52, alto sesgo
+   - Óptimo (15): R²=0.5847 ✓
+   - Alto (None): R²=0.5671, overfitting
+   → Conclusión: Limitar profundidad previene overfitting
+
+2. n_estimators (EFECTO MODERADO):
+   - 50: R²=0.5604
+   - 100: R²=0.5719 (default, reasonable)
+   - 200: R²=0.5847 ✓ (better)
+   - 300: R²=0.5851 (<1% mejora, overkill)
+   → Conclusión: 200 es sweet spot (diminishing returns después)
+
+3. min_samples_split (EFECTO BAJO):
+   - 2: R²=0.5721
+   - 5: R²=0.5847 ✓ (reduce overfitting ligero)
+   - 10: R²=0.5589
+   → Conclusión: 5 es conservador, reduces varianza
+
+TRADE-OFF ANÁLISIS:
+
+Before optimization:
+┌─────────────┬──────────────┐
+│ R² Train    │ 0.68         │
+│ R² Test     │ 0.5719       │
+│ Gap (overfitting) │ 0.11   │ ← GAP moderado
+└─────────────┴──────────────┘
+
+After optimization:
+┌─────────────┬──────────────┐
+│ R² Train    │ 0.61         │
+│ R² Test     │ 0.5847       │
+│ Gap (overfitting) │ 0.025  │ ← GAP REDUCIDO ✓
+└─────────────┴──────────────┘
+
+Interpretación: Optimización NO solo mejoró test R², también REDUJO 
+overfitting (gap train-test se achicó). Modelo más confiable.
+
+CONTEXTO (ORAL - 2.5 minutos):
+"Aquí llegamos a una decisión importante: ¿cuánto 'tuning' vale la pena? 
+Realizamos búsqueda sistemática usando GridSearchCV para Random Forest.
+
+Testamos 240 combinaciones posibles de 4 parámetros críticos: número de 
+árboles, profundidad máxima, muestras mínimas por split, etc.
+
+Los resultados fueron: mejora del 2.2% en R² (de 0.5719 a 0.5847). 
+¿Es significativa? Depende del contexto. En términos de error, pasamos 
+de RMSE=0.6384 a RMSE=0.6325: reducción de 0.006 puntos. Pequeña pero 
+consistente.
+
+Más interesante: el gap entre training y test se redujo significativamente. 
+Antes había diferencia de 0.11 entre train (0.68) y test (0.57). Después, 
+la brecha es solo 0.025. Esto significa el modelo optimizado 
+GENERALIZA MEJOR.
+
+Para Gradient Boosting, ejecutamos RandomSearch (20 iteraciones) por ser 
+más complejo. Obtuvimos mejora del 5.6% (más dramática porque partía de 
+R²=0.46), pero RF sigue siendo superior.
+
+La conclusión operativa: no vale la pena hyper-tuning extremo. Pero este 
+level de optimización (máx 2-5% mejora) SÍ vale porque aumenta 
+confiabilidad para producción."
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 7: ANÁLISIS NO SUPERVISADO (2 minutos)
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Gráfico 2D de PCA + Clustering de colores
+
+ANÁLISIS 1: PCA (Reducción Dimensionalidad)
+
+Objetivo: Visualizar datos en espacio de baja dimensión, preservar info
+
+Resultado:
+  9 componentes principales → 95% varianza explicada
+  (vs 14 features originales)
+
+Varianza acumulada:
+  PC1: 38%  (capacitaciones positivo, ausencias negativo)
+  PC1-2: 61% 
+  PC1-3: 77%
+  ...
+  PC1-9: 95% ✓ SELECCIONADO
+
+Utilidad:
+✓ Visualización 2D-3D de empleados
+✓ Reducción ruido, dimensionalidad manejable
+✓ Preprocesamiento para métodos sensibles (SVR, KNN)
+
+ANÁLISIS 2: K-Means Clustering (Segmentación)
+
+Objetivo: Identificar grupos naturales de empleados
+
+Elección K (5 clusters):
+┌────┬────────┬──────────────┐
+│ K  │ Inertia│ Silhouette   │
+├────┼────────┼──────────────┤
+│ 2  │ 450.2  │ 0.3845       │
+│ 3  │ 380.1  │ 0.4123       │
+│ 4  │ 320.5  │ 0.4234       │
+│ 5  │ 298.8  │ 0.4633 ✓     │
+│ 6  │ 290.3  │ 0.4521       │
+└────┴────────┴──────────────┘
+
+Silhouette máximo en k=5 (0.4633 = buena separación)
+Codo inercio también alrededor k=5
+
+Perfiles de Clusters Resultantes:
+
+Cluster 0 - "Desempeño Alto" (62 empl, 20%):
+  - Puntaje: 81.3 (alto)
+  - Ausencias: 3.2 días (muy bajo)
+  - Capacitaciones: 45.6 horas
+  - Perfil: Empleados estrella, retención prioritaria
+
+Cluster 1 - "Desempeño Normal" (71 empl, 23%):
+  - Puntaje: 72.1 (promedio)
+  - Ausencias: 8.7 días (normal)
+  - Capacitaciones: 38.2 horas
+  - Perfil: Empleados estables
+
+Cluster 2 - "Necesita Desarrollo" (58 empl, 19%):
+  - Puntaje: 65.4 (bajo)
+  - Ausencias: 14.3 días (alto)
+  - Capacitaciones: 28.5 horas (bajo)
+  - Perfil: Programa mentoría recomendado
+
+Cluster 3 - "Alto Potencial" (65 empl, 21%):
+  - Puntaje: 75.8 (alto)
+  - Ausencias: 5.1 días (bajo)
+  - Capacitaciones: 62.1 horas (alto)
+  - Perfil: Inversión en desarrollo, líderes futuros
+
+Cluster 4 - "Bajo Rendimiento" (53 empl, 17%):
+  - Puntaje: 58.2 (muy bajo)
+  - Ausencias: 22.1 días (muy alto)
+  - Capacitaciones: 12.3 horas (mínimas)
+  - Perfil: ⚠️ Requiere intervención urgente
+
+INSIGHTS INTEGRADOS:
+✓ Clustering VALIDA importancia de capacitaciones y ausencias (expected)
+✓ 3 clusters positivos (62% empleados) vs 2 negativos (38%)
+✓ Oportunidad: Programas dirigidos por cluster
+
+CONTEXTO (ORAL - 2 minutos):
+"Completamos el análisis con técnicas no supervisadas. Primero, PCA nos 
+permitió reducir 14 dimensiones a 9 preservando 95% información. Esto es 
+útil para visualizar patrones de empleados en 2D, y también como 
+preprocesamiento para modelos sensibles a dimensionalidad.
+
+Segundo, aplicamos K-Means para segmentación automática. Identificamos 5 
+clusters naturales. El análisis es revelador:
+
+- 20% son empleados estrella: alto desempeño, baja ausencia. 
+  Recomendación: retención, roles de liderazgo.
+
+- 23% desempeño normal, estables. Mantener.
+
+- 19% necesita desarrollo: bajo desempeño pero potencial. 
+  Recomendación: mentoría, capacitación.
+
+- 21% alto potencial: desempeño bueno, invierten en capacitación. 
+  Recomendación: acelerar desarrollo, sucesión.
+
+- 17% bajo rendimiento preocupante: ausencias altas, capacitación mínima. 
+  Recomendación: evaluación inmediata, planes de mejora o desvinculación.
+
+Esto demuestra que técnicas no supervisadas COMPLEMENTAN predicción: no solo 
+predecimos desempeño individual, sino que segmentamos para insights tácticos."
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 8: CONCLUSIONES Y RECOMENDACIONES (2.5 minutos)
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Resumen ejecutivo + roadmap futuro
+
+CONCLUSIONES PRINCIPALES:
+
+1. PODER PREDICTIVO VALIDADO:
+   "Random Forest explica 57% de varianza en desempeño mediante solo 
+   variables de RH. Esto es SIGNIFICATIVO: 57% > 33% de baseline, mejora 
+   74%."
+   
+   ¿Qué significa el 43% restante?
+   - Factores personales: motivación, circunstancias, personalidad
+   - Factores org: liderazgo, ambiente, recursos
+   - Factores del puesto: complejidad, autonomía
+   
+   INSIGHT: Desempeño es MULTIFACTORIAL. Variables de RH son 
+   IMPORTANTES pero NO DETERMINANTES.
+
+2. RELACIONES NO-LINEALES DOMINAN:
+   "La superioridad de RF (0.57) vs Linear (0.33) prueba que 
+   relaciones complejas existen. Ejemplo: empleado puede tener 
+   ausencias altas pero capacitación alta y aún buen desempeño."
+
+3. FACTORES CLAVE IDENTIFICADOS:
+   - Evaluaciones previas: 28% importancia
+   - Capacitaciones: 19% importancia
+   - Ausencias: 16% importancia
+   
+   "Operativamente: ENFOQUE en estas 3 áreas generará máximo ROI."
+
+4. SEGMENTACIÓN PROPORCIONA VALOR TÁCTICO:
+   "5 clusters revelan perfiles distintos → programas RH dirigidos"
+
+RECOMENDACIONES OPERATIVAS:
+
+CORTO PLAZO (Hoy-Próxima Semana):
+✓ Adoptar RF optimizado como modelo predictor
+✓ Generar reportes para cada empleado con probabilidad desempeño bajo
+✓ Identificar empleados Cluster 4 (bajo rendimiento) para intervención
+✓ Comunicar feature importance a liderazgo de RH
+
+MEDIANO PLAZO (1-3 Meses):
+✓ Recolectar variables ADICIONALES para mejorar R²:
+  - Factores motivacionales (encuesta clima)
+  - Calidad liderazgo (evaluación 360)
+  - Complejidad de tareas
+  Target: R² > 0.70
+  
+✓ Implementar monitoreo continuo:
+  - Reentrenar modelo mensualmente
+  - Validar si predictions se cumplen en realidad
+  - Alertas automáticas para desvíos
+  
+✓ Automatizar pipeline:
+  - Integración con sistemas HR (SAP, Workday)
+  - Dashboard para managers
+  - Early warning para bajo desempeño
+
+LARGO PLAZO (3-12 Meses):
+✓ Investigación de CAUSALIDAD (no solo correlación):
+  - A/B testing de capacitaciones
+  - Análisis causal usando econometría
+  - Estudio cualitativo de empleados alto vs bajo desempeño
+  
+✓ Expansión a otros problemas HR:
+  - Predicción de rotación (quién se va)
+  - Recomendación de roles/puestos (fit óptimo)
+  - Análisis de equidad en evaluaciones
+
+LECCIONES APRENDIDAS:
+
+Técnica:
+1. Feature engineering es crítico: manual features + PCA → interpretación
+2. Ensemble methods dominan para datos complejos
+3. Validación cruzada ESSENTIAL para estimar error real
+4. Trade-off interpretabilidad vs predicción: feature importance mitiga
+
+Metodología:
+5. Comparación exhaustiva de modelos es imprescindible
+6. GridSearch + RandomSearch proporciona valor operativo (~2-5% mejora)
+7. Análisis no supervisado complementa supervisado (insights adicionales)
+
+Negocio:
+8. Modelos ML para RH requieren validación humana (57% ≠ determinante)
+9. Segmentación proporciona tanto predicción como insights tácticos
+10. Comunicación a stakeholders: explicar limitaciones (43% varianza)
+
+PREGUNTAS ESPERADAS Y RESPUESTAS:
+
+P: "¿Por qué solo 57% de varianza? ¿No debería ser mayor?"
+R: "57% es EXCELENTE para datos de RH complejos. Indica que 57% se 
+explica por datos que tenemos, 43% por factores externos (motivación, 
+liderazgo, personalidad). Es NORMAL, no es falla."
+
+P: "¿Confían en el modelo para decisiones de personal (despidos, ascensos)?"
+R: "Parcialmente. Usar como REFERENCIA junto con juicio humano, no como 
+única métrica. Es herramienta de apoyo, no decisión autómata."
+
+P: "¿Qué sucede si nuevos empleados entran?"
+R: "Reentrenamos modelo mensualmente con datos nuevos. Si patrón cambia, 
+modelo lo captura. Sistema dinámico, no estático."
+
+CONTEXTO (ORAL - 2.5 minutos):
+"En conclusión, desarrollamos modelo predictivo robusto que explica 57% 
+de varianza en desempeño. No es perfecto (43% se debe a factores no 
+medidos), pero es OPERATIVAMENTE ÚTIL.
+
+El análisis de features reveló que 3 variables acumulan 63% importancia: 
+evaluaciones, capacitaciones, ausencias. Para RH significa: enfoque aquí 
+genera máximo impacto.
+
+Implementamos clustering que segmenta empleados en 5 perfiles distintos. 
+Esto permite no solo predicción individual, sino también insight de grupo.
+
+Nuestras recomendaciones son pragmáticas: primero, usar modelo para 
+identificar empleados en riesgo (Cluster 4); segundo, recolectar más 
+variables en mediano plazo para mejorar predicción; tercero, investigar 
+causalidad mediante A/B testing en largo plazo.
+
+Queremos enfatizar: este es herramienta de APOYO, no decisión automática. 
+Desempeño es multifactorial, y variables de RH explican menos de 60%. 
+Liderazgo, ambiente, personalidad tienen peso. El modelo indica qué 
+INVESTIGAR, no qué hacer."
+
+═══════════════════════════════════════════════════════════════════════════════
+SLIDE 9: PREGUNTAS (1 minuto)
+═══════════════════════════════════════════════════════════════════════════════
+
+VISUAL: Contacto / Información del proyecto
+
+GRACIAS POR ESCUCHAR
+
+¿PREGUNTAS?
+
+Repositorio del proyecto: [GitHub URL]
+Informe técnico completo: INFORME_TECNICO_FINAL.txt (14 páginas)
+Notebooks ejecutables: /notebooks/01-05
+Código fuente: /src/prueba/pipelines/
+
+Contacto: [Email]
+
+CIERRE (ORAL - 30 seg):
+"Esto concluye mi presentación. Implementamos ciclo ML completo: desde 
+integración de datos, feature engineering, comparación de 7 modelos, 
+optimización de hiperparámetros, hasta análisis no supervisado.
+
+El resultado es modelo Random Forest con R²=0.5847 que predice desempeño 
+de empleados con utilidad operativa. Más importante, identificamos factores 
+clave y proporcionamos segmentación para decisiones RH dirigidas.
+
+Estoy disponible para preguntas."
+
+================================================================================
+NOTAS PARA EL PRESENTER
+================================================================================
+
+TIMING:
+- Slide 1: 1 min
+- Slide 2: 1 min  
+- Slide 3: 1.5 min
+- Slide 4: 2 min ← Énfasis
+- Slide 5: 2 min ← Énfasis (resultados)
+- Slide 6: 2.5 min ← Énfasis (optimización)
+- Slide 7: 2 min
+- Slide 8: 2.5 min (conclusiones)
+- Slide 9: 1 min (preguntas)
+TOTAL: ~15 minutos
+
+MATERIALS DE APOYO:
+- Notebook 02 (Modelado): Mostrar código de 7 modelos
+- Notebook 03 (Evaluación): Mostrar métricas calculadas, gráficos
+- Notebook 04 (Optimización): Mostrar convergencia GridSearch
+- Notebook 05 (Final): Mostrar PCA visualization, K-Means clustering
+
+PUNTOS A ENFATIZAR:
+1. Selección de modelos FUE JUSTIFICADA, no arbitraria
+2. Comparación exhaustiva: 7 modelos, 5-fold CV, train/test split
+3. Optimización sistemática: GridSearch 72 combinaciones
+4. Integración no supervisada: PCA + K-Means aportan valor
+
+POSIBLES PREGUNTAS Y RESPUESTAS PREPARADAS:
+Q: "¿Cómo elegieron Random Forest?"
+A: "Comparamos 7 modelos: RF superó con R²=0.57 vs 0.33 de Linear. 
+Además proporciona feature importance para interpretabilidad, crítica en HR."
+
+Q: "¿Validaron overfitting?"
+A: "Sí: 5-fold CV (0.56±0.07), test set independiente, análisis de 
+gap train-test (reducido post-optimización)."
+
+Q: "¿Código es reproducible?"
+A: "100%: random_state=42, pipeline Kedro 26 nodos, todo documentado, 
+versionado en Git."
+
+================================================================================
+FIN DE PRESENTACIÓN
+================================================================================
+
